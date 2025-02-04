@@ -4,7 +4,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/ArdrewChen/TestGoMall/conf"
+	"github.com/ArdrewChen/TestGoMall/demo/demo_thrift/conf"
 	"github.com/ArdrewChen/TestGoMall/demo/demo_thrift/kitex_gen/api/echo"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
