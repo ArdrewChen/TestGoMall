@@ -12,7 +12,6 @@ require (
 	github.com/kitex-contrib/registry-consul v0.1.0
 	github.com/kr/pretty v0.3.1
 	github.com/redis/go-redis/v9 v9.7.0
-	github.com/yuefan-mo/studymall/demo/demo_thrift v0.0.0-20250209092310-c0a6410b1acf
 	go.uber.org/zap v1.27.0
 	google.golang.org/protobuf v1.33.0
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
