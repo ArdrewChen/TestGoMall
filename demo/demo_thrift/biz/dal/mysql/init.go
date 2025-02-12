@@ -1,7 +1,7 @@
 package mysql
 
 import (
-	"github.com/ArdrewChen/TestGoMall/demo/demo_thrift/conf"
+	"github.com/yuefan-mo/studymall/demo/demo_thrift/conf"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

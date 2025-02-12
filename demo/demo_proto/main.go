@@ -1,28 +1,36 @@
 package main
 
 import (
+	"log"
 	"net"
 	"time"
 
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"github.com/cloudwego/kitex/pkg/transmeta"
 	"github.com/cloudwego/kitex/server"
+	"github.com/joho/godotenv"
 	kitexlogrus "github.com/kitex-contrib/obs-opentelemetry/logging/logrus"
-	"github.com/yuefan-mo/studymall/demo/demo_thrift/conf"
-	"github.com/yuefan-mo/studymall/demo/demo_thrift/kitex_gen/api/echo"
+	consul "github.com/kitex-contrib/registry-consul"
+	"github.com/yuefan-mo/studymall/demo/demo_proto/conf"
+	"github.com/yuefan-mo/studymall/demo/demo_proto/kitex_gen/pbapi/echoservice"
+	"github.com/yuefan-mo/studymall/demo/demo_proto/biz/dal"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil{
+		panic(err)
+	}
+	dal.Init()
 	opts := kitexInit()
 
-	svr := echo.NewServer(new(EchoImpl), opts...)
+	svr := echoservice.NewServer(new(EchoServiceImpl), opts...)
 
-	err := svr.Run()
-	if err != nil {
-		klog.Error(err.Error())
+	err1 := svr.Run()
+	if err1 != nil {
+		klog.Error(err1.Error())
 	}
 }
 
@@ -38,8 +46,14 @@ func kitexInit() (opts []server.Option) {
 	opts = append(opts, server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{
 		ServiceName: conf.GetConf().Kitex.Service,
 	}))
-	// thrift meta handler
-	opts = append(opts, server.WithMetaHandler(transmeta.ServerTTHeaderHandler))
+
+	//"127.0.0.1:8500"
+	//conf.GetConf().Registry.RegistryAddress[0]
+	r, err := consul.NewConsulRegister(conf.GetConf().Registry.RegistryAddress[0])
+	if err != nil {
+		log.Fatal(err)
+	}
+	opts = append(opts, server.WithRegistry(r))
 
 	// klog
 	logger := kitexlogrus.NewLogger()

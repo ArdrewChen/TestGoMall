@@ -5,9 +5,9 @@ package echo
 import (
 	"context"
 	"errors"
-	api "github.com/ArdrewChen/TestGoMall/demo/demo_thrift/kitex_gen/api"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
+	api "github.com/yuefan-mo/studymall/demo/demo_thrift/kitex_gen/api"
 )
 
 var errInvalidMessageType = errors.New("invalid message type for service method handler")

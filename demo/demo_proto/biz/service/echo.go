@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	api "github.com/yuefan-mo/studymall/demo/demo_thrift/kitex_gen/api"
+	pbapi "github.com/yuefan-mo/studymall/demo/demo_proto/kitex_gen/pbapi"
 )
 
 type EchoService struct {
@@ -14,8 +14,8 @@ func NewEchoService(ctx context.Context) *EchoService {
 }
 
 // Run create note info
-func (s *EchoService) Run(req *api.Request) (resp *api.Response, err error) {
+func (s *EchoService) Run(req *pbapi.Request) (resp *pbapi.Response, err error) {
 	// Finish your business logic.
 
-	return &api.Response{Message: req.Message}, nil
+	return &pbapi.Response{Message: req.Message}, nil
 }

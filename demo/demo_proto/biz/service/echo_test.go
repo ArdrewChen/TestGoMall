@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	api "github.com/yuefan-mo/studymall/demo/demo_thrift/kitex_gen/api"
 	"testing"
+	pbapi "github.com/yuefan-mo/studymall/demo/demo_proto/kitex_gen/pbapi"
 )
 
 func TestEcho_Run(t *testing.T) {
@@ -11,7 +11,7 @@ func TestEcho_Run(t *testing.T) {
 	s := NewEchoService(ctx)
 	// init req and assert value
 
-	req := &api.Request{}
+	req := &pbapi.Request{}
 	resp, err := s.Run(req)
 	t.Logf("err: %v", err)
 	t.Logf("resp: %v", resp)
