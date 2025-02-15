@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/cloudwego/kitex/client"
-	//"github.com/cloudwego/kitex/pkg/remote/transmeta"
+	"github.com/cloudwego/kitex/pkg/transmeta"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/transport"
 	"github.com/yuefan-mo/studymall/demo/demo_thrift/kitex_gen/api"
