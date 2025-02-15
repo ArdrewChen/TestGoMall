@@ -5,12 +5,22 @@ import (
 	"fmt"
 
 	"github.com/cloudwego/kitex/client"
+	//"github.com/cloudwego/kitex/pkg/remote/transmeta"
+	"github.com/cloudwego/kitex/pkg/rpcinfo"
+	"github.com/cloudwego/kitex/transport"
 	"github.com/yuefan-mo/studymall/demo/demo_thrift/kitex_gen/api"
 	"github.com/yuefan-mo/studymall/demo/demo_thrift/kitex_gen/api/echo"
 )
 
 func main() {
-	cli, err := echo.NewClient("demo_thrift", client.WithHostPorts("loaclhost:8888"))
+	cli, err := echo.NewClient("demo_thrift", client.WithHostPorts("localhost:8888"),
+	client.WithMetaHandler(transmeta.ClientTTHeaderHandler),
+	client.WithTransportProtocol(transport.TTHeader),
+	client.WithClientBasicInfo(&rpcinfo.EndpointBasicInfo{
+		ServiceName: "demo_thrift_client",
+	}),
+
+)
 	if err != nil{
 		panic(nil)
 	}
